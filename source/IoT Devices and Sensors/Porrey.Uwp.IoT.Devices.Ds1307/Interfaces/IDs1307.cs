@@ -28,11 +28,11 @@ namespace Porrey.Uwp.IoT.Devices
 		Ds1307.OscillatorOutputMode OscillatorMode { get; set; }
 		GpioPinValue OscillatorValue { get; set; }
 
-		Task<DateTime> GetAsync();
+		Task<DateTimeOffset> GetAsync();
 		Task Halt();
 		Task<byte[]> ReadMemory();
 		Task Resume();
-		Task SetAsync(DateTime value);
+		Task SetAsync(DateTimeOffset value);
 		Task WriteMemory(byte[] data);
 	}
 }

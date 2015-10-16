@@ -107,9 +107,9 @@ namespace Porrey.Uwp.IoT.Devices
 		/// Get the current Date and Time from the DS1307.
 		/// </summary>
 		/// <returns>The current date and time as a System.DateTime object.</returns>
-		public Task<DateTime> GetAsync()
+		public Task<DateTimeOffset> GetAsync()
 		{
-			DateTime returnValue = DateTime.MinValue;
+			DateTimeOffset returnValue = DateTime.MinValue;
 
 			byte[] readBuffer = new byte[7];
 			byte[] writeBuffer = new byte[] { RTC_ADDRESS };
@@ -126,7 +126,7 @@ namespace Porrey.Uwp.IoT.Devices
 				Bcd.ToInt((byte)(readBuffer[0] & 0x7f))     // Seconds (bit 7 is the clock halt bit; 0 = enabled, 1 = halted)
 			);
 
-			return Task<DateTime>.FromResult(returnValue);
+			return Task<DateTimeOffset>.FromResult(returnValue);
 		}
 
 		/// <summary>
@@ -134,7 +134,7 @@ namespace Porrey.Uwp.IoT.Devices
 		/// </summary>
 		/// <param name="value">The date and time as a System.DateTime object
 		/// that will be saved on the DS1307.</param>
-		public async Task SetAsync(DateTime value)
+		public async Task SetAsync(DateTimeOffset value)
 		{
 			byte[] writeBuffer = new byte[]
 			{
