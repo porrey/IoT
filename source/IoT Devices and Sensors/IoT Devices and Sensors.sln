@@ -15,11 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Porrey.Uwp.IoT.Sensors.Htu2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Porrey.Uwp.IoT.Devices.Lifx", "Porrey.Uwp.IoT.Devices.Lifx\Porrey.Uwp.IoT.Devices.Lifx.csproj", "{9E32023A-493B-483C-AB8A-81953F7149D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Porrey.Uwp.IoT.Devices.Keypad", "Porrey.Uwp.IoT.Devices.Membrane1x4\Porrey.Uwp.IoT.Devices.Keypad.csproj", "{3E760075-28C1-4491-95BD-5DE4185AD6D4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo Application", "Demo Application\Demo Application.csproj", "{CBC1398B-3ACA-4AB6-8665-CE382CA2B431}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Porrey.Uwp.IoT.Temperature", "Porrey.Uwp.IoT.Temperature\Porrey.Uwp.IoT.Temperature.csproj", "{50FCFE00-BB7D-440D-80FE-02C414922B5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Porrey.Uwp.IoT.Devices.Keypad", "Porrey.Uwp.IoT.Devices.Keypad\Porrey.Uwp.IoT.Devices.Keypad.csproj", "{3E760075-28C1-4491-95BD-5DE4185AD6D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,22 +129,6 @@ Global
 		{9E32023A-493B-483C-AB8A-81953F7149D9}.Release|x64.Build.0 = Release|x64
 		{9E32023A-493B-483C-AB8A-81953F7149D9}.Release|x86.ActiveCfg = Release|x86
 		{9E32023A-493B-483C-AB8A-81953F7149D9}.Release|x86.Build.0 = Release|x86
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|ARM.ActiveCfg = Debug|ARM
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|ARM.Build.0 = Debug|ARM
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|x64.ActiveCfg = Debug|x64
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|x64.Build.0 = Debug|x64
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|x86.ActiveCfg = Debug|x86
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|x86.Build.0 = Debug|x86
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|ARM.ActiveCfg = Release|ARM
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|ARM.Build.0 = Release|ARM
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|x64.ActiveCfg = Release|x64
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|x64.Build.0 = Release|x64
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|x86.ActiveCfg = Release|x86
-		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|x86.Build.0 = Release|x86
 		{CBC1398B-3ACA-4AB6-8665-CE382CA2B431}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{CBC1398B-3ACA-4AB6-8665-CE382CA2B431}.Debug|ARM.ActiveCfg = Debug|ARM
 		{CBC1398B-3ACA-4AB6-8665-CE382CA2B431}.Debug|ARM.Build.0 = Debug|ARM
@@ -181,6 +165,22 @@ Global
 		{50FCFE00-BB7D-440D-80FE-02C414922B5C}.Release|x64.Build.0 = Release|x64
 		{50FCFE00-BB7D-440D-80FE-02C414922B5C}.Release|x86.ActiveCfg = Release|x86
 		{50FCFE00-BB7D-440D-80FE-02C414922B5C}.Release|x86.Build.0 = Release|x86
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|ARM.ActiveCfg = Debug|ARM
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|ARM.Build.0 = Debug|ARM
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|x64.ActiveCfg = Debug|x64
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|x64.Build.0 = Debug|x64
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|x86.ActiveCfg = Debug|x86
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Debug|x86.Build.0 = Debug|x86
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|ARM.ActiveCfg = Release|ARM
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|ARM.Build.0 = Release|ARM
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|x64.ActiveCfg = Release|x64
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|x64.Build.0 = Release|x64
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|x86.ActiveCfg = Release|x86
+		{3E760075-28C1-4491-95BD-5DE4185AD6D4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

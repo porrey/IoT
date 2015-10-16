@@ -132,13 +132,13 @@
       <Project>{c7b9b501-ab3f-4a8f-8b2e-4b601bbd528d}</Project>
       <Name>Porrey.Uwp.IoT.Devices.Ds1307</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Porrey.Uwp.IoT.Devices.Keypad\Porrey.Uwp.IoT.Devices.Keypad.csproj">
+      <Project>{3e760075-28c1-4491-95bd-5de4185ad6d4}</Project>
+      <Name>Porrey.Uwp.IoT.Devices.Keypad</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Porrey.Uwp.IoT.Devices.Lifx\Porrey.Uwp.IoT.Devices.Lifx.csproj">
       <Project>{9e32023a-493b-483c-ab8a-81953f7149d9}</Project>
       <Name>Porrey.Uwp.IoT.Devices.Lifx</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Porrey.Uwp.IoT.Devices.Membrane1x4\Porrey.Uwp.IoT.Devices.Keypad.csproj">
-      <Project>{3e760075-28c1-4491-95bd-5de4185ad6d4}</Project>
-      <Name>Porrey.Uwp.IoT.Devices.Keypad</Name>
     </ProjectReference>
     <ProjectReference Include="..\Porrey.Uwp.IoT.Devices.SI1145\Porrey.Uwp.IoT.Devices.SI1145.csproj">
       <Project>{15f4d8e3-f45b-4c5e-9435-ae938b5af5f0}</Project>
@@ -155,6 +155,10 @@
     <ProjectReference Include="..\Porrey.Uwp.IoT.Sensors.I2C\Porrey.Uwp.IoT.Sensors.I2c.csproj">
       <Project>{18f9cd57-2ebf-42eb-8568-1756a2f3fbb3}</Project>
       <Name>Porrey.Uwp.IoT.Sensors.I2c</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Porrey.Uwp.IoT.Temperature\Porrey.Uwp.IoT.Temperature.csproj">
+      <Project>{50fcfe00-bb7d-440d-80fe-02c414922b5c}</Project>
+      <Name>Porrey.Uwp.IoT.Temperature</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

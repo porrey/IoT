@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Porrey.IoT.Ntp")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Provides an NTP Client for Universal applications.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Daniel Porrey")]
 [assembly: AssemblyProduct("Porrey.IoT.Ntp")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("© 2015 Daniel M. Porrey. All Rights Reserved.")]
+[assembly: AssemblyTrademark("written by Daniel M. Porrey")]
 [assembly: AssemblyCulture("")]
 
 // Version information for an assembly consists of the following four values:

@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Porrey.Uwp.IoT.Devices.Membrane1x4")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Porrey.Uwp.IoT.Devices.Keypad")]
+[assembly: AssemblyDescription("Provides integration for the Adafruit 1x4 and 3x4 membrane keypads.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Porrey.Uwp.IoT.Devices.Membrane1x4")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Daniel  Porrey")]
+[assembly: AssemblyProduct("Porrey.Uwp.IoT.Devices.Keypad")]
+[assembly: AssemblyCopyright("© 2015 Daniel M. Porrey. All Rights Reserved.")]
+[assembly: AssemblyTrademark("written by Daniel M. Porrey")]
 [assembly: AssemblyCulture("")]
 
 // Version information for an assembly consists of the following four values:
