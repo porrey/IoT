@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A8B6F759-087B-47EE-9ABF-4882CCBF0362}</ProjectGuid>
+    <ProjectGuid>{6681A9D6-5480-4442-A4AD-D76C2CC64413}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Porrey.Uwp.IoT</RootNamespace>
-    <AssemblyName>Porrey.Uwp.IoT.SensorStability</AssemblyName>
+    <RootNamespace>Porrey.Uwp.IoT.FluentApi</RootNamespace>
+    <AssemblyName>Porrey.Uwp.IoT.FluentApi</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
@@ -104,15 +104,21 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="IoT.SensorStability.1.0.0.nupkg" />
+    <None Include="IoT.FluentApi.1.0.0.nupkg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\StabilityMonitor.cs" />
-    <Compile Include="Models\StabilityReading.cs" />
+    <Compile Include="Extensions\GpioExtensions.cs" />
+    <Compile Include="Models\GpioPinConfiguration.cs" />
+    <Compile Include="Models\IGpioPinConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="COPYING.txt" />
-    <Content Include="Properties\Porrey.Uwp.IoT.SensorStability.rd.xml" />
+    <Content Include="Properties\Porrey.Uwp.IoT.Gpio.FluentApi.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsIoT, Version=10.0.10240.0">
+      <Name>Windows IoT Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

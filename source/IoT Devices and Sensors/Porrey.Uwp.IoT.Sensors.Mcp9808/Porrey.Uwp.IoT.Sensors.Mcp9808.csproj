@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A8B6F759-087B-47EE-9ABF-4882CCBF0362}</ProjectGuid>
+    <ProjectGuid>{DFAAC570-B57A-47E6-975B-1EC5D5D0A594}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Porrey.Uwp.IoT</RootNamespace>
-    <AssemblyName>Porrey.Uwp.IoT.SensorStability</AssemblyName>
+    <RootNamespace>Porrey.Uwp.IoT.Sensors</RootNamespace>
+    <AssemblyName>Porrey.Uwp.IoT.Sensors.Mcp9808</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
@@ -104,15 +104,19 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="IoT.SensorStability.1.0.0.nupkg" />
+    <None Include="Documents\adafruit-mcp9808-precision-i2c-temperature-sensor-guide.pdf" />
+    <None Include="Documents\MCP9808.pdf" />
+    <None Include="IoT.Mcp9808.1.0.0.nupkg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\StabilityMonitor.cs" />
-    <Compile Include="Models\StabilityReading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="COPYING.txt" />
-    <Content Include="Properties\Porrey.Uwp.IoT.SensorStability.rd.xml" />
+    <Content Include="Properties\Porrey.Uwp.IoT.Sensors.Mcp9808.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

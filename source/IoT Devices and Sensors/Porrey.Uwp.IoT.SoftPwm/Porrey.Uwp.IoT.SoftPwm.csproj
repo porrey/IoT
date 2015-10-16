@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A8B6F759-087B-47EE-9ABF-4882CCBF0362}</ProjectGuid>
+    <ProjectGuid>{BBFE22A6-5151-431D-933A-3CA700015FC8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Porrey.Uwp.IoT</RootNamespace>
-    <AssemblyName>Porrey.Uwp.IoT.SensorStability</AssemblyName>
+    <AssemblyName>Porrey.Uwp.IoT.SoftPwm</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
@@ -104,16 +104,24 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="IoT.SensorStability.1.0.0.nupkg" />
+    <None Include="IoT.SoftPwm.1.0.0.nupkg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\StabilityMonitor.cs" />
-    <Compile Include="Models\StabilityReading.cs" />
+    <Compile Include="Interfaces\ISoftPwm.cs" />
+    <Compile Include="Models\PulseWidthChangedEventArgs.cs" />
+    <Compile Include="Models\SoftPwm.cs" />
+    <Compile Include="Extensions\SoftPwmExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="COPYING.txt" />
-    <Content Include="Properties\Porrey.Uwp.IoT.SensorStability.rd.xml" />
+    <Content Include="Properties\Porrey.Uwp.IoT.SoftPwm.rd.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsIoT, Version=10.0.10240.0">
+      <Name>Windows IoT Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
