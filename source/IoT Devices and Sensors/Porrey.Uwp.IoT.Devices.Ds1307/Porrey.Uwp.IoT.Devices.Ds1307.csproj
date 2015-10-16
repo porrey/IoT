@@ -111,6 +111,7 @@
     <Compile Include="Models\Ds1307.cs" />
     <Compile Include="Interfaces\IDs1307.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="COPYING.txt" />
     <Content Include="Properties\Porrey.Uwp.IoT.Devices.rd.xml" />
   </ItemGroup>
   <ItemGroup>

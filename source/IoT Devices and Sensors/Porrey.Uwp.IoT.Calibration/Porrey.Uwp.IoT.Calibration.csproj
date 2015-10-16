@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{15F4D8E3-F45B-4C5E-9435-AE938B5AF5F0}</ProjectGuid>
+    <ProjectGuid>{DCA99CC2-315B-4394-9B60-4600738C1F1F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Porrey.Uwp.IoT.Devices</RootNamespace>
-    <AssemblyName>Porrey.Uwp.IoT.Devices.SI1145</AssemblyName>
+    <RootNamespace>Porrey.Uwp.IoT.Calibration</RootNamespace>
+    <AssemblyName>Porrey.Uwp.IoT.Calibration</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
@@ -104,25 +104,20 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="IoT.SI1145.1.0.0.nupkg" />
+    <None Include="IoT.Calibration.1.0.0.nupkg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ISI1145.cs" />
-    <Compile Include="Models\SI1145.cs" />
+    <Compile Include="Models\AdjustedNonLinearCalibration.cs" />
+    <Compile Include="Extensions\NumericExtensions.cs" />
+    <Compile Include="Interfaces\ICalibratedMeasurement.cs" />
+    <Compile Include="Models\CalibratedMeasurement.cs" />
+    <Compile Include="Models\CalibrationPoint.cs" />
+    <Compile Include="Models\LinearCalibration.cs" />
+    <Compile Include="Models\NonLinearCalibration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Properties\Porrey.Uwp.IoT.Deviuces.SI1145.rd.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="WindowsIoT, Version=10.0.10240.0">
-      <Name>Windows IoT Extensions for the UWP</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Porrey.Uwp.IoT.Sensors.I2C\Porrey.Uwp.IoT.Sensors.I2c.csproj">
-      <Project>{18f9cd57-2ebf-42eb-8568-1756a2f3fbb3}</Project>
-      <Name>Porrey.Uwp.IoT.Sensors.I2c</Name>
-    </ProjectReference>
+    <Content Include="COPYING.txt" />
+    <Content Include="Properties\Porrey.Uwp.IoT.Calibration.rd.xml" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

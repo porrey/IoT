@@ -108,6 +108,7 @@
     <None Include="Demo_Application_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="COPYING.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -128,6 +129,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Porrey.Uwp.IoT.Calibration\Porrey.Uwp.IoT.Calibration.csproj">
+      <Project>{dca99cc2-315b-4394-9b60-4600738c1f1f}</Project>
+      <Name>Porrey.Uwp.IoT.Calibration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Porrey.Uwp.IoT.Devices.Ds1307\Porrey.Uwp.IoT.Devices.Ds1307.csproj">
       <Project>{c7b9b501-ab3f-4a8f-8b2e-4b601bbd528d}</Project>
       <Name>Porrey.Uwp.IoT.Devices.Ds1307</Name>
@@ -140,10 +145,6 @@
       <Project>{9e32023a-493b-483c-ab8a-81953f7149d9}</Project>
       <Name>Porrey.Uwp.IoT.Devices.Lifx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Porrey.Uwp.IoT.Devices.SI1145\Porrey.Uwp.IoT.Devices.SI1145.csproj">
-      <Project>{15f4d8e3-f45b-4c5e-9435-ae938b5af5f0}</Project>
-      <Name>Porrey.Uwp.IoT.Devices.SI1145</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Porrey.Uwp.IoT.Ntp\Porrey.Uwp.IoT.Ntp.csproj">
       <Project>{63493ca8-1949-4a51-bcdc-1df6d7374b30}</Project>
       <Name>Porrey.Uwp.IoT.Ntp</Name>
@@ -155,6 +156,18 @@
     <ProjectReference Include="..\Porrey.Uwp.IoT.Sensors.I2C\Porrey.Uwp.IoT.Sensors.I2c.csproj">
       <Project>{18f9cd57-2ebf-42eb-8568-1756a2f3fbb3}</Project>
       <Name>Porrey.Uwp.IoT.Sensors.I2c</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Porrey.Uwp.IoT.Sensors.SI1145\Porrey.Uwp.IoT.Sensors.SI1145.csproj">
+      <Project>{15f4d8e3-f45b-4c5e-9435-ae938b5af5f0}</Project>
+      <Name>Porrey.Uwp.IoT.Sensors.SI1145</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Porrey.Uwp.IoT.Sensors.Spi\Porrey.Uwp.IoT.Sensors.Spi.csproj">
+      <Project>{acfb968f-06f9-4f4f-9a70-ed226be12e31}</Project>
+      <Name>Porrey.Uwp.IoT.Sensors.Spi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Porrey.Uwp.IoT.SensorStability\Porrey.Uwp.IoT.SensorStability.csproj">
+      <Project>{a8b6f759-087b-47ee-9abf-4882ccbf0362}</Project>
+      <Name>Porrey.Uwp.IoT.SensorStability</Name>
     </ProjectReference>
     <ProjectReference Include="..\Porrey.Uwp.IoT.Temperature\Porrey.Uwp.IoT.Temperature.csproj">
       <Project>{50fcfe00-bb7d-440d-80fe-02c414922b5c}</Project>

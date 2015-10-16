@@ -7,7 +7,7 @@
     <ProjectGuid>{9E32023A-493B-483C-AB8A-81953F7149D9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Porrey.Uwp.IoT.Devices.Lifx</RootNamespace>
+    <RootNamespace>Porrey.Uwp.IoT.Devices</RootNamespace>
     <AssemblyName>Porrey.Uwp.IoT.Devices.Lifx</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -144,6 +144,7 @@
     <Compile Include="Models\Mix.cs" />
     <Compile Include="Models\Transition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="COPYING.txt" />
     <Content Include="Properties\Porrey.Uwp.IoT.Devices.Lifx.rd.xml" />
   </ItemGroup>
   <ItemGroup />

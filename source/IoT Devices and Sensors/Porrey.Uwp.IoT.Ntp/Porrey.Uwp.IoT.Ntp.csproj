@@ -111,6 +111,7 @@
     <Compile Include="Interfaces\INtpClient.cs" />
     <Compile Include="Models\NtpClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="COPYING.txt" />
     <Content Include="Properties\Porrey.IoT.Ntp.rd.xml" />
   </ItemGroup>
   <ItemGroup />

@@ -111,6 +111,7 @@
     <Compile Include="Models\Htu21df.cs" />
     <Compile Include="Interfaces\IHtu21df.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="COPYING.txt" />
     <Content Include="Properties\Porrey.Uwp.IoT.Devices.Htu21df.rd.xml" />
   </ItemGroup>
   <ItemGroup>

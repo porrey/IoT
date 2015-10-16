@@ -9,10 +9,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Porrey.Uwp.IoT.Temperature")]
 [assembly: AssemblyDescription("Provides a mechanism for temperature conversion.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Daniel M Porrey")]
+[assembly: AssemblyCompany("Daniel Porrey")]
 [assembly: AssemblyProduct("Porrey.Uwp.IoT.Temperature")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
-[assembly: AssemblyTrademark("written by Daniel M Porrey")]
+[assembly: AssemblyCopyright("Copyright © 2015 Daniel Porrey. All Rights Reserved.")]
+[assembly: AssemblyTrademark("written by Daniel M. Porrey")]
 [assembly: AssemblyCulture("")]
 
 // Version information for an assembly consists of the following four values:

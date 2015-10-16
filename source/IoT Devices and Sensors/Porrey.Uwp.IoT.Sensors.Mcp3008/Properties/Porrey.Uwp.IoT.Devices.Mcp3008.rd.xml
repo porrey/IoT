@@ -25,7 +25,7 @@
     http://go.microsoft.com/fwlink/?LinkID=391919
 -->
 <Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
-  <Library Name="Porrey.Uwp.IoT.Deviuces.SI1145">
+  <Library Name="Porrey.Uwp.IoT.Sensors.Mcp3008">
 
   	<!-- add directives for your library here -->
 

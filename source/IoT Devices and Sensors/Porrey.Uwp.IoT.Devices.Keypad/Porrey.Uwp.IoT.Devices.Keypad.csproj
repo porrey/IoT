@@ -7,7 +7,7 @@
     <ProjectGuid>{3E760075-28C1-4491-95BD-5DE4185AD6D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Porrey.Uwp.IoT.Devices.KeyPad</RootNamespace>
+    <RootNamespace>Porrey.Uwp.IoT.Devices.Keypad</RootNamespace>
     <AssemblyName>Porrey.Uwp.IoT.Devices.KeyPad</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -121,6 +121,7 @@
     <Compile Include="Models\GpioPinMapping.cs" />
     <Compile Include="Models\PinValueChangedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="COPYING.txt" />
     <Content Include="Properties\Porrey.Uwp.IoT.Devices.Membrane1x4.rd.xml" />
   </ItemGroup>
   <ItemGroup>

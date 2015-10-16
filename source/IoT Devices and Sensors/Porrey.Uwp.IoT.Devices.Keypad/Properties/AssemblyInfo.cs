@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Porrey.Uwp.IoT.Devices.Keypad")]
 [assembly: AssemblyDescription("Provides integration for the Adafruit 1x4 and 3x4 membrane keypads.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Daniel  Porrey")]
+[assembly: AssemblyCompany("Daniel Porrey")]
 [assembly: AssemblyProduct("Porrey.Uwp.IoT.Devices.Keypad")]
-[assembly: AssemblyCopyright("© 2015 Daniel M. Porrey. All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2015 Daniel Porrey. All Rights Reserved.")]
 [assembly: AssemblyTrademark("written by Daniel M. Porrey")]
 [assembly: AssemblyCulture("")]
 
