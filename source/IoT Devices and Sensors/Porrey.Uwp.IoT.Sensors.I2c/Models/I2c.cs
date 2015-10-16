@@ -23,6 +23,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Devices.I2c;
+using Windows.Foundation.Metadata;
 
 namespace Porrey.Uwp.IoT.Sensors
 {
@@ -284,6 +285,11 @@ namespace Porrey.Uwp.IoT.Sensors
 		public async Task ResetAsync()
 		{
 			await this.OnResetAsync();
+		}
+
+		public static bool IsAvailable()
+		{
+			return ApiInformation.IsTypePresent(typeof(I2cDevice).FullName);
 		}
 
 		public void Dispose()
