@@ -21,20 +21,20 @@ namespace System
 	/// <summary>
 	/// Helper methods for temperature conversion
 	/// </summary>
-	public class Temperature
+	public static class Temperature
 	{
 		/// <summary>
 		/// Converts a temperature in Celsius to Fahrenheit.
 		/// </summary>
 		/// <param name="fahrenheit">The temperature in Celsius.</param>
 		/// <returns>Returns the temperature in Fahrenheit.</returns>
-		public static float ConvertToCelsius(float fahrenheit) => (fahrenheit - 32f) * 5f / 9f;
+		public static float ConvertToCelsius(this float fahrenheit) => (fahrenheit - 32f) * 5f / 9f;
 
 		/// <summary>
 		/// Converts a temperature in Fahrenheit to Celsius.
 		/// </summary>
 		/// <param name="celsius">The temperature in Fahrenheit.</param>
 		/// <returns>Returns the temperature in Celsius.</returns>
-		public static float ConvertToFahrenheit(float celsius) => (celsius * 9f / 5f) + 32f;
+		public static float ConvertToFahrenheit(this float celsius) => (celsius * 9f / 5f) + 32f;
 	}
 }
