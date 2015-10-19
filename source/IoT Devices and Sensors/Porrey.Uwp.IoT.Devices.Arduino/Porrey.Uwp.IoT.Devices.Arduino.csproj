@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="Arduino.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="COPYING.txt" />
     <Content Include="Properties\Porrey.Uwp.IoT.Devices.Arduino.rd.xml" />
   </ItemGroup>
   <ItemGroup>
