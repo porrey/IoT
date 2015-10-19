@@ -25,7 +25,7 @@ namespace Porrey.Uwp.Ntp
 	{
 		TimeSpan Timeout { get; set; }
 
-		Task<DateTime?> GetAsync(string server);
-		Task<DateTime?> GetAsync(params string[] servers);
+		Task<DateTimeOffset?> GetAsync(string server);
+		Task<DateTimeOffset?> GetAsync(params string[] servers);
 	}
 }

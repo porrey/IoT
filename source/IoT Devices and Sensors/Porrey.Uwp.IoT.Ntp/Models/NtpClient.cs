@@ -51,9 +51,9 @@ namespace Porrey.Uwp.Ntp
 		/// of the NTP server to call.</param>
 		/// <returns>Returns a DateTime instance containing the date and time
 		/// obtained from the NTP server.</returns>
-		public async Task<DateTime?> GetAsync(string server)
+		public async Task<DateTimeOffset?> GetAsync(string server)
 		{
-			DateTime? returnValue = null;
+			DateTimeOffset? returnValue = null;
 
 			// ***
 			// *** Create a DatagramSocket for the UDP message
@@ -74,7 +74,7 @@ namespace Porrey.Uwp.Ntp
 				byte[] data = new byte[48];
 				reader.ReadBytes(data);
 
-				returnValue = this.CreateDateTime(data);
+				returnValue = this.ConvertDateTime(data);
 
 				// ***
 				// *** Signal that the callback is complete
@@ -126,26 +126,26 @@ namespace Porrey.Uwp.Ntp
 		/// from the first server to respond.</param>
 		/// <returns>Returns a DateTime instance containing the date and time
 		/// obtained from the NTP server.</returns>
-		public async Task<DateTime?> GetAsync(params string[] servers)
+		public async Task<DateTimeOffset?> GetAsync(params string[] servers)
 		{
-			DateTime? returnValue = null;
+			DateTimeOffset? returnValue = null;
 
 			// ***
 			// *** Create the list of tasks
 			// ***
-			IEnumerable<Task<DateTime?>> taskQuery = from server in servers select this.GetAsync(server);
+			IEnumerable<Task<DateTimeOffset?>> taskQuery = from server in servers select this.GetAsync(server);
 
 			// ***
 			// *** Execute the tasks
 			// ***
-			List<Task<DateTime?>> taskList = taskQuery.ToList();
+			List<Task<DateTimeOffset?>> taskList = taskQuery.ToList();
 
 			while (taskList.Count() > 0)
 			{
 				// ***
 				// *** Select one of the results
 				// ***
-				Task<DateTime?> completedTask = await Task.WhenAny(taskList);
+				Task<DateTimeOffset?> completedTask = await Task.WhenAny(taskList);
 
 				// ***
 				// *** Remove this from the list
@@ -195,9 +195,9 @@ namespace Porrey.Uwp.Ntp
 		/// <param name="data">The data returned from the NTP server.</param>
 		/// <returns>Returns a DateTime instance containing the date and time
 		/// obtained from the NTP server.</returns>
-		private DateTime? CreateDateTime(byte[] data)
+		private DateTimeOffset? ConvertDateTime(byte[] data)
 		{
-			DateTime? returnValue = null;
+			DateTimeOffset? returnValue = null;
 
 			byte offsetTransmitTime = 40;
 			ulong intpart = 0;
