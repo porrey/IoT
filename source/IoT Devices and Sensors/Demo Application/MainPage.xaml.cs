@@ -21,10 +21,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Porrey.Uwp.IoT.Devices;
+using Porrey.Uwp.IoT.Devices.Arduino;
 using Porrey.Uwp.IoT.Devices.KeyPad;
 using Porrey.Uwp.IoT.Devices.Lifx;
 using Porrey.Uwp.IoT.Sensors;
+using Porrey.Uwp.IoT.System;
 using Porrey.Uwp.Ntp;
+using Windows.Devices.Gpio;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -39,7 +42,7 @@ namespace MyTime3
 
 		protected async override void OnNavigatedTo(NavigationEventArgs e)
 		{
-			await TestKeyPad1();
+			await TestArduino();
 			base.OnNavigatedTo(e);
 		}
 
@@ -164,8 +167,9 @@ namespace MyTime3
 			Htu21df.Resolution res5 = await temp.GetResolution();
 
 			float h = await temp.ReadHumidityAsync();
-			float t1 = await temp.ReadTemperatureAsync();
-		}
+			float tc1 = await temp.ReadTemperatureAsync();
+			float tf1 = tc1.ConvertToFahrenheit();
+        }
 
 		private async Task TestLightSensor()
 		{
@@ -191,13 +195,13 @@ namespace MyTime3
 			// ***
 			// *** Get the date and time from the clock
 			// ***
-			DateTime dt = await dtc.GetAsync();
+			DateTimeOffset dt = await dtc.GetAsync();
 
 			// ***
 			// *** Create an NTP client and get the date and time
 			// ***
 			NtpClient ntp = new NtpClient();
-			DateTime? ndt = await ntp.GetAsync("0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org", "3.pool.ntp.org");
+			DateTimeOffset? ndt = await ntp.GetAsync("0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org", "3.pool.ntp.org");
 
 			// ***
 			// *** Update the clock if we have a result from the servers
@@ -206,6 +210,39 @@ namespace MyTime3
 			{
 				await dtc.SetAsync(ndt.Value);
 			}
+		}
+
+		private async Task TestArduino()
+		{
+			Arduino arduino = new Arduino(0x04);
+			await arduino.InitializeAsync();
+
+			await arduino.Tone(3, 45001, TimeSpan.FromSeconds(6.19715));
+			await arduino.NoTone(3);
+
+			await arduino.Tone(3, 36128);
+			await arduino.NoTone(3);
+
+			await arduino.PinMode(2, ArduinoPinMode.Input);
+			ArduinoPinValue result = await arduino.DigitalRead(2);
+
+			// ***
+			// *** Red
+			// ***
+			await arduino.PinMode(9, ArduinoPinMode.Output);
+			await arduino.DigitalWrite(9, ArduinoPinValue.Low);
+
+			// ***
+			// *** Blue
+			// ***
+			await arduino.PinMode(10, ArduinoPinMode.Output);
+			await arduino.DigitalWrite(10, ArduinoPinValue.High);
+
+			// ***
+			// *** Green
+			// ***
+			await arduino.PinMode(11, ArduinoPinMode.Output);
+			await arduino.DigitalWrite(11, ArduinoPinValue.High);
 		}
 	}
 }
