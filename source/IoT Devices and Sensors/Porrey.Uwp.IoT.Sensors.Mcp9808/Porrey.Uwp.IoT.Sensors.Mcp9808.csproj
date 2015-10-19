@@ -110,13 +110,36 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IDeviceId.cs" />
+    <Compile Include="Interfaces\IDeviceSensorReading.cs" />
+    <Compile Include="Interfaces\IDeviceSensorReadingExtensions.cs" />
+    <Compile Include="Interfaces\II2CSensor.cs" />
+    <Compile Include="Interfaces\IMcp9808.cs" />
+    <Compile Include="Models\DeviceId.cs" />
+    <Compile Include="Models\DeviceSensorReading.cs" />
+    <Compile Include="Models\Mcp9808.cs" />
+    <Compile Include="Models\Mcp9808Address.cs" />
+    <Compile Include="Models\Mcp9808ConfigurationBit.cs" />
+    <Compile Include="Exceptions\Mcp9808Exception.cs" />
+    <Compile Include="Models\Mcp9808Register.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="COPYING.txt" />
     <Content Include="Properties\Porrey.Uwp.IoT.Sensors.Mcp9808.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\Porrey.Uwp.IoT.Sensors.I2C\Porrey.Uwp.IoT.Sensors.I2c.csproj">
+      <Project>{18f9cd57-2ebf-42eb-8568-1756a2f3fbb3}</Project>
+      <Name>Porrey.Uwp.IoT.Sensors.I2c</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Porrey.Uwp.IoT.Temperature\Porrey.Uwp.IoT.Temperature.csproj">
+      <Project>{50fcfe00-bb7d-440d-80fe-02c414922b5c}</Project>
+      <Name>Porrey.Uwp.IoT.Temperature</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsIoT, Version=10.0.10240.0">
+      <Name>Windows IoT Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
