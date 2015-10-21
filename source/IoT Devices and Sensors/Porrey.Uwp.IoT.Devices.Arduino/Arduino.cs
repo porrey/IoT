@@ -6,13 +6,13 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 {
 	public enum ArduinoRegister
 	{
-		PinMode = 0x00,
-		DigitalRead = 0x01,
-		DigitalWrite = 0x02,
-		AnalogRead = 0x03,
-		AnalogWrite = 0x04,
-		Tone = 0x05,
-		NoTone = 0x06
+		PinMode = 0,
+		DigitalRead = 1,
+		DigitalWrite = 2,
+		AnalogRead = 3,
+		AnalogWrite = 4,
+		Tone = 5,
+		NoTone = 6
 	}
 
 	public enum ArduinoPinValue
@@ -37,17 +37,20 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 
 		public async Task PinMode(byte pin, ArduinoPinMode pinMode)
 		{
-			await this.WriteAsync(new byte[] { (byte)ArduinoRegister.PinMode, pin, (byte)pinMode });
+			byte[] registerId = BitConverter.GetBytes((uint)ArduinoRegister.PinMode);
+            await this.WriteAsync(new byte[] { registerId[0], registerId[1], pin, (byte)pinMode });
 		}
 
 		public async Task DigitalWrite(byte pin, ArduinoPinValue value)
 		{
-			await this.WriteAsync(new byte[] { (byte)ArduinoRegister.DigitalWrite, pin, (byte)value });
+			byte[] registerId = BitConverter.GetBytes((uint)ArduinoRegister.DigitalWrite);
+			await this.WriteAsync(new byte[] { registerId[0], registerId[1], pin, (byte)value });
 		}
 
 		public async Task AnalogWrite(byte pin, byte value)
 		{
-			await this.WriteAsync(new byte[] { (byte)ArduinoRegister.AnalogWrite, pin, value });
+			byte[] registerId = BitConverter.GetBytes((uint)ArduinoRegister.AnalogWrite);
+			await this.WriteAsync(new byte[] { registerId[0], registerId[1], pin, value });
 		}
 
 		public async Task<ArduinoPinValue> DigitalRead(byte pin)
@@ -55,7 +58,8 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 			ArduinoPinValue returnValue = ArduinoPinValue.Low;
 
 			byte[] readBuffer = new byte[1];
-			await this.WriteAsync(new byte[] { (byte)ArduinoRegister.DigitalRead, pin });
+			byte[] registerId = BitConverter.GetBytes((uint)ArduinoRegister.DigitalRead);
+			await this.WriteAsync(new byte[] { registerId[0], registerId[1], pin });
 
 			// ***
 			// *** Need a very short delay here for this to work
@@ -83,8 +87,9 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 			// ***
 			UInt32 durationInMilliseconds = (UInt32)duration.TotalMilliseconds;
 			byte[] durationBytes = BitConverter.GetBytes(durationInMilliseconds);
+			byte[] registerId = BitConverter.GetBytes((uint)ArduinoRegister.DigitalRead);
 
-			await this.WriteAsync(new byte[] { (byte)ArduinoRegister.Tone, pin, frequencyBytes[0], frequencyBytes[1], durationBytes[0], durationBytes[1], durationBytes[2], durationBytes[3] });
+			await this.WriteAsync(new byte[] { registerId[0], registerId[1], pin, frequencyBytes[0], frequencyBytes[1], durationBytes[0], durationBytes[1], durationBytes[2], durationBytes[3] });
 		}
 
 		public async Task Tone(byte pin, UInt16 frequency)
@@ -93,13 +98,15 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 			// *** 2 bytes
 			// ***
 			byte[] frequencyBytes = BitConverter.GetBytes(frequency);
+			byte[] registerId = BitConverter.GetBytes((uint)ArduinoRegister.DigitalRead);
 
-			await this.WriteAsync(new byte[] { (byte)ArduinoRegister.Tone, pin, frequencyBytes[0], frequencyBytes[1]});
+			await this.WriteAsync(new byte[] { registerId[0], registerId[1], pin, frequencyBytes[0], frequencyBytes[1]});
 		}
 
 		public async Task NoTone(byte pin)
 		{
-			await this.WriteAsync(new byte[] { (byte)ArduinoRegister.NoTone, pin });
+			byte[] registerId = BitConverter.GetBytes((uint)ArduinoRegister.DigitalRead);
+			await this.WriteAsync(new byte[] { registerId[0], registerId[1], pin });
 		}
 	}
 }

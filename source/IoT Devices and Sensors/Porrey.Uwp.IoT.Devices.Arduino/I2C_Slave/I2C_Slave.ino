@@ -50,21 +50,47 @@
 #define MAX_OUTPUT_BUFFER 4
 
 // ***
-// *** Define the registers (commands)
 // ***
-#define PIN_MODE      0x00
-#define DIGITAL_READ  0x01
-#define DIGITAL_WRITE 0x02
-#define ANALOG_READ   0x03
-#define ANALOG_WRITE  0x04
-#define TONE          0x05
-#define NO_TONE       0x06
+// ***
+typedef void (* CommandCallback)(int, byte*);
+
+// ***
+// ***
+// ***
+struct RegisterMapping
+{
+  String name;
+  unsigned int expectedByteCount;
+  CommandCallback commandCallback;
+};
+
+// ***
+// *** Array of commands supported. The idnex of the array
+// *** is the register ID.
+// ***
+RegisterMapping _mappings[] =
+{
+  { "pinMode()", 4, pinModeCommand },
+  { "digitalRead()", 3, digitalReadCommand },
+  { "digitalWrite()", 4, digitalWriteCommand },
+  { "analogRead()", 3, analogReadCommand },
+  { "analogWrite()", 3, analogWriteCommand },
+  { "tone() ", 9, toneCommand1 },
+  { "tone() ", 5, toneCommand2 },
+  { "noTone", 3, noToneCommand }
+};
+
+// ***
+// *** Number of mappings defined
+// ***
+unsigned int _mappingCount = 0;
 
 // ***
 // *** Result/error codes
 // ***
-#define RESULT_SUCCESS            0
-#define RESULT_BUFFER_TOO_SMALL   1
+#define RESULT_SUCCESS                0
+#define RESULT_UNEXPECTED_BUFFER      1
+#define RESULT_COMMAND_NOT_SUPPORTED  2
 
 // ***
 // *** Output buffer. Note each command
@@ -91,12 +117,229 @@ void setup()
   Wire.onReceive(receiveData);
   Wire.onRequest(sendData);
 
-  Serial.println("Ready!");
+  // ***
+  // *** Calculate the mapping count
+  // ***
+  _mappingCount = (sizeof(_mappings) / sizeof(RegisterMapping));
+  Serial.print("There are ");
+  Serial.print(_mappingCount);
+  Serial.println(" command register mappings defined.");
+
+  Serial.println("Ready, waiting for commands...");
 }
 
 void loop()
 {
   delay(100);
+}
+
+void pinModeCommand(int bufferSize, byte buffer[])
+{
+  // ***
+  // *** Set pin Mode
+  // ***
+  Serial.print("\tpinMode(pin = ");
+  Serial.print(buffer[2]);
+  Serial.print(", mode = ");
+
+  if (buffer[3] == 0)
+  {
+    Serial.println("INPUT)");
+  }
+  else if (buffer[3] == 1)
+  {
+    Serial.println("OUTPUT)");
+  }
+  else if (buffer[3] == 2)
+  {
+    Serial.println("INPUT_PULLUP)");
+  }
+
+  pinMode(buffer[2], buffer[3]);
+
+  // ***
+  // *** Set the result
+  // ***
+  setResult(RESULT_SUCCESS, 0);
+}
+
+void digitalReadCommand(int bufferSize, byte buffer[])
+{
+  // ***
+  // *** Read from a digital port
+  // ***
+  Serial.print("\tdigitalRead(pin = D");
+  Serial.print(buffer[2]);
+  Serial.print(") = ");
+
+  byte value = digitalRead(buffer[2]);
+  _bufferLength = 1;
+  _outBuffer[0] = value;
+
+  if (value == HIGH)
+  {
+    Serial.println("HIGH");
+  }
+  else
+  {
+    Serial.println("LOW");
+  }
+
+  // ***
+  // *** Set the result
+  // ***
+  setResult(RESULT_SUCCESS, 0);
+}
+
+void digitalWriteCommand(int bufferSize, byte buffer[])
+{
+  // ***
+  // *** Digital write
+  // ***
+  Serial.print("\tdigitalWrite(pin = D");
+  Serial.print(buffer[2]);
+  Serial.print(", value = ");
+
+  if (buffer[3] == 1)
+  {
+    Serial.println("HIGH)");
+  }
+  else
+  {
+    Serial.println("LOW)");
+  }
+
+  digitalWrite(buffer[2], buffer[3]);
+
+  // ***
+  // *** Set the result
+  // ***
+  setResult(RESULT_SUCCESS, 0);
+}
+
+void analogReadCommand(int bufferSize, byte buffer[])
+{
+  // ***
+  // ***
+  // ***
+  Serial.print("\tanalogRead(pin = A");
+  Serial.print(buffer[2]);
+  Serial.print(") = ");
+
+  byte value = analogRead(buffer[2]);
+
+  Serial.println(value);
+
+  _bufferLength = 1;
+  _outBuffer[0] = { value };
+
+  // ***
+  // *** Set the result
+  // ***
+  setResult(RESULT_SUCCESS, 0);
+}
+
+void analogWriteCommand(int bufferSize, byte buffer[])
+{
+  // ***
+  // *** Analog write
+  // ***
+  Serial.print("\tanalogWrite(pin = A");
+  Serial.print(buffer[2]);
+  Serial.print(", value = ");
+  Serial.println(buffer[3]);
+
+  analogWrite(buffer[2], buffer[3]);
+
+  // ***
+  // *** Set the result
+  // ***
+  setResult(RESULT_SUCCESS, 0);
+}
+
+void toneCommand1(int bufferSize, byte buffer[])
+{
+  // ***
+  // *** Get the frequency
+  // ***
+  unsigned int frequency = 0;
+  frequency = buffer[4];
+  frequency <<= 8;
+  frequency += buffer[3];
+
+  // ***
+  // *** Get the duration
+  // ***
+  unsigned long duration = 0;
+  duration = buffer[8];
+  duration <<= 8;
+  duration += buffer[7];
+  duration <<= 8;
+  duration += buffer[6];
+  duration <<= 8;
+  duration += buffer[5];
+
+  // ***
+  // *** tone(pin, frequency, duration)
+  // ***
+  Serial.print("\ttone(Pin = ");
+  Serial.print(buffer[2]);
+  Serial.print(", Frequency = ");
+  Serial.print(frequency);
+  Serial.print(", Duration = ");
+  Serial.print(duration);
+  Serial.println(")");
+
+  tone(buffer[2], frequency, duration);
+
+  // ***
+  // *** Set the result
+  // ***
+  setResult(RESULT_SUCCESS, 0);
+}
+
+void toneCommand2(int bufferSize, byte buffer[])
+{
+  // ***
+  // *** Get the frequency
+  // ***
+  unsigned int frequency = 0;
+  frequency = buffer[4];
+  frequency <<= 8;
+  frequency += buffer[3];
+
+  // ***
+  // *** tone(pin, frequency)
+  // ***
+  Serial.print("\ttone(Pin = ");
+  Serial.print(buffer[2]);
+  Serial.print(", Frequency = ");
+  Serial.print(frequency);
+  Serial.println(")");
+
+  tone(buffer[2], frequency);
+
+  // ***
+  // *** Set the result
+  // ***
+  setResult(RESULT_SUCCESS, 0);
+}
+
+void noToneCommand(int bufferSize, byte buffer[])
+{
+  // ***
+  // *** noTone(pin)
+  // ***
+  Serial.print("\tnoTone(Pin = ");
+  Serial.print(buffer[2]);
+  Serial.println(")");
+
+  noTone(buffer[2]);
+
+  // ***
+  // *** Set the result
+  // ***
+  setResult(RESULT_SUCCESS, 0);
 }
 
 int getBuffer(byte buffer[])
@@ -122,284 +365,6 @@ void setResult(byte result, byte value)
   _bufferLength = 2;
 }
 
-void pinModeCommand(int bufferSize, byte buffer[])
-{
-  if (bufferSize >= 3)
-  {
-    // ***
-    // *** Set pin Mode
-    // ***
-    Serial.print("pinMode(pin = ");
-    Serial.print(buffer[1]);
-    Serial.print(", mode = ");
-
-    if (buffer[2] == 0)
-    {
-      Serial.println("INPUT)");
-    }
-    else if (buffer[2] == 1)
-    {
-      Serial.println("OUTPUT)");
-    }
-    else if (buffer[2] == 2)
-    {
-      Serial.println("INPUT_PULLUP)");
-    }
-
-    pinMode(buffer[1], buffer[2]);
-
-    // ***
-    // *** Set the result
-    // ***
-    setResult(RESULT_SUCCESS, 0);
-  }
-  else
-  {
-    // ***
-    // *** Specify that the buffer is too small. The
-    // *** value passed is the expected size of the
-    // *** input buffer.
-    // ***
-    setResult(RESULT_BUFFER_TOO_SMALL, 3);
-  }
-}
-
-void digitalReadCommand(int bufferSize, byte buffer[])
-{
-  if (bufferSize >= 2)
-  {
-    // ***
-    // *** Read from a digital port
-    // ***
-    Serial.print("digitalRead(pin = D");
-    Serial.print(buffer[1]);
-    Serial.print(") = ");
-
-    byte value = digitalRead(buffer[1]);
-    _bufferLength = 1;
-    _outBuffer[0] = value;
-
-    if (value == HIGH)
-    {
-      Serial.println("HIGH");
-    }
-    else
-    {
-      Serial.println("LOW");
-    }
-
-    // ***
-    // *** Set the result
-    // ***
-    setResult(RESULT_SUCCESS, 0);
-  }
-  else
-  {
-    // ***
-    // *** Specify that the buffer is too small. The
-    // *** value passed is the expected size of the
-    // *** input buffer.
-    // ***
-    setResult(RESULT_BUFFER_TOO_SMALL, 2);
-  }
-}
-
-void digitalWriteCommand(int bufferSize, byte buffer[])
-{
-  if (bufferSize >= 3)
-  {
-    // ***
-    // *** Digital write
-    // ***
-    Serial.print("digitalWrite(pin = D");
-    Serial.print(buffer[1]);
-    Serial.print(", value = ");
-
-    if (buffer[2] == 1)
-    {
-      Serial.println("HIGH)");
-    }
-    else
-    {
-      Serial.println("LOW)");
-    }
-
-    digitalWrite(buffer[1], buffer[2]);
-
-    // ***
-    // *** Set the result
-    // ***
-    setResult(RESULT_SUCCESS, 0);
-  }
-  else
-  {
-    // ***
-    // *** Specify that the buffer is too small. The
-    // *** value passed is the expected size of the
-    // *** input buffer.
-    // ***
-    setResult(RESULT_BUFFER_TOO_SMALL, 3);
-  }
-}
-
-void analogReadCommand(int bufferSize, byte buffer[])
-{
-  if (bufferSize >= 2)
-  {
-    // ***
-    // ***
-    // ***
-    Serial.print("analogRead(pin = A");
-    Serial.print(buffer[1]);
-    Serial.print(") = ");
-
-    byte value = analogRead(buffer[1]);
-
-    Serial.println(value);
-
-    _bufferLength = 1;
-    _outBuffer[0] = { value };
-
-    // ***
-    // *** Set the result
-    // ***
-    setResult(RESULT_SUCCESS, 0);
-  }
-  else
-  {
-    // ***
-    // *** Specify that the buffer is too small. The
-    // *** value passed is the expected size of the
-    // *** input buffer.
-    // ***
-    setResult(RESULT_BUFFER_TOO_SMALL, 2);
-  }
-}
-
-void analogWriteCommand(int bufferSize, byte buffer[])
-{
-  if (bufferSize >= 2)
-  {
-    // ***
-    // *** Analog write
-    // ***
-    Serial.print("analogWrite(pin = A");
-    Serial.print(buffer[1]);
-    Serial.print(", value = ");
-    Serial.println(buffer[2]);
-
-    analogWrite(buffer[1], buffer[2]);
-
-    // ***
-    // *** Set the result
-    // ***
-    setResult(RESULT_SUCCESS, 0);
-  }
-  else
-  {
-    // ***
-    // *** Specify that the buffer is too small. The
-    // *** value passed is the expected size of the
-    // *** input buffer.
-    // ***
-    setResult(RESULT_BUFFER_TOO_SMALL, 2);
-  }
-}
-
-void toneCommand(int bufferSize, byte buffer[])
-{
-  unsigned int frequency = 0;
-  frequency = buffer[3];
-  frequency <<= 8;
-  frequency += buffer[2];
-
-  if (bufferSize >= 8)
-  {
-    unsigned long duration = 0;
-    duration = buffer[7];
-    duration <<= 8;
-    duration += buffer[6];
-    duration <<= 8;
-    duration += buffer[5];
-    duration <<= 8;
-    duration += buffer[4];
-
-    // ***
-    // *** tone(pin, frequency, duration)
-    // ***
-    Serial.print("Set tone(Pin = ");
-    Serial.print(buffer[1]);
-    Serial.print(", Frequency = ");
-    Serial.print(frequency);
-    Serial.print(", Duration = ");
-    Serial.print(duration);
-    Serial.println(")");
-
-    tone(buffer[1], frequency, duration);
-
-    // ***
-    // *** Set the result
-    // ***
-    setResult(RESULT_SUCCESS, 0);
-  }
-  else if (bufferSize >= 4)
-  {
-    // ***
-    // *** tone(pin, frequency)
-    // ***
-    Serial.print("Set tone(Pin = ");
-    Serial.print(buffer[1]);
-    Serial.print(", Frequency = ");
-    Serial.print(frequency);
-    Serial.println(")");
-
-    tone(buffer[1], frequency);
-
-    // ***
-    // *** Set the result
-    // ***
-    setResult(RESULT_SUCCESS, 0);
-  }
-  else
-  {
-    // ***
-    // *** Specify that the buffer is too small. The
-    // *** value passed is the expected size of the
-    // *** input buffer.
-    // ***
-    setResult(RESULT_BUFFER_TOO_SMALL, 8);
-  }
-}
-
-void noToneCommand(int bufferSize, byte buffer[])
-{
-  if (bufferSize >= 2)
-  {
-    // ***
-    // *** noTone(pin)
-    // ***
-    Serial.print("Set noTone(Pin = ");
-    Serial.print(buffer[1]);
-    Serial.println(")");
-
-    noTone(buffer[1]);
-
-    // ***
-    // *** Set the result
-    // ***
-    setResult(RESULT_SUCCESS, 0);
-  }
-  else
-  {
-    // ***
-    // *** Specify that the buffer is too small. The
-    // *** value passed is the expected size of the
-    // *** input buffer.
-    // ***
-    setResult(RESULT_BUFFER_TOO_SMALL, 2);
-  }
-}
-
 // ***
 // *** Callback for received data
 // ***
@@ -408,41 +373,64 @@ void receiveData(int byteCount)
   Serial.print("Data received: [");
   Serial.print(byteCount);
   Serial.println(" byte(s)]");
-  Serial.print("\tCommand: ");
 
+  // ***
+  // *** Get the buffer
+  // ***
   byte buffer[byteCount];
   int count = getBuffer(buffer);
 
   // ***
-  // *** The first byte is the register/command
+  // *** The first 2 bytes are the reigisterId. This
+  // *** is mapped to the index in the mapping array.
   // ***
-  if (buffer[0] == PIN_MODE)
+  unsigned int registerId = 0;
+  registerId = buffer[1];
+  registerId <<= 8;
+  registerId += buffer[0];
+
+  Serial.print("\tRegister ID  '");
+  Serial.print(registerId);
+  Serial.print(" => '");
+
+  if (registerId < _mappingCount)
   {
-    pinModeCommand(byteCount, buffer);
+    // ***
+    // *** Show the name of the command
+    // ***
+    Serial.print(_mappings[registerId].name);
+    Serial.println("'");
+
+    if (byteCount == _mappings[registerId].expectedByteCount)
+    {
+      // ***
+      // *** Call the commandCallback for this register
+      // ***
+      _mappings[registerId].commandCallback(byteCount, buffer);
+    }
+    else
+    {
+      Serial.print("\tThe buffer size for this command was unexpected. Expected size is ");
+      Serial.println(_mappings[registerId].expectedByteCount);
+
+      // ***
+      // *** Specify that the buffer size was unexpected.
+      // ***
+      setResult(RESULT_UNEXPECTED_BUFFER, 3);
+    }
   }
-  else if (buffer[0] == DIGITAL_READ)
+  else
   {
-    digitalReadCommand(byteCount, buffer);
-  }
-  else if (buffer[0] == DIGITAL_WRITE)
-  {
-    digitalWriteCommand(byteCount, buffer);
-  }
-  else if (buffer[0] == ANALOG_READ)
-  {
-    analogReadCommand(byteCount, buffer);
-  }
-  else if (buffer[0] == ANALOG_WRITE)
-  {
-    analogWriteCommand(byteCount, buffer);
-  }
-  else if (buffer[0] == TONE)
-  {
-    toneCommand(byteCount, buffer);
-  }
-  else if (buffer[0] == NO_TONE)
-  {
-    noToneCommand(byteCount, buffer);
+    // ***
+    // *** Display not supported message
+    // ***
+    Serial.println("Not Supported");
+
+    // ***
+    // *** Specify that the registerId is not
+    // *** supported.
+    // ***
+    setResult(RESULT_COMMAND_NOT_SUPPORTED, 2);
   }
 }
 
