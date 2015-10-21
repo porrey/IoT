@@ -20,7 +20,7 @@
 /*
   Arduino i2c Slave
   written by Daniel Porrey
-  Version 1.0
+  Version 1.0.0
 
   This is the partner sketch for the C# library for communicating
   to the Arduino via the i2c bus from Windows 10 IoT Core on the
