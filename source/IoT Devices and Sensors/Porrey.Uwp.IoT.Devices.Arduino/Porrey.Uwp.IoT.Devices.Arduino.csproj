@@ -104,14 +104,16 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="IoT.Arduino.1.0.0.nupkg" />
     <None Include="project.json" />
-    <None Include="I2C_Slave\I2C_Slave.ino" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arduino.cs" />
+    <Compile Include="Models\Arduino.cs" />
+    <Compile Include="Interfaces\IArduino.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="COPYING.txt" />
     <Content Include="Properties\Porrey.Uwp.IoT.Devices.Arduino.rd.xml" />
+    <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Porrey.Uwp.IoT.Sensors.I2C\Porrey.Uwp.IoT.Sensors.I2c.csproj">
