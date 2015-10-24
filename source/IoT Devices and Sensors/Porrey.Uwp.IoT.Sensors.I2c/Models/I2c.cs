@@ -215,7 +215,7 @@ namespace Porrey.Uwp.IoT.Sensors
 		{
 			bool returnValue = false;
 
-			if (IsInitialized)
+			if (this.IsInitialized)
 			{
 				// ***
 				// *** 
@@ -234,7 +234,7 @@ namespace Porrey.Uwp.IoT.Sensors
 		{
 			bool returnValue = false;
 
-			if (IsInitialized)
+			if (this.IsInitialized)
 			{
 				// ***
 				// *** 
@@ -253,7 +253,7 @@ namespace Porrey.Uwp.IoT.Sensors
 		{
 			bool returnValue = false;
 
-			if (IsInitialized)
+			if (this.IsInitialized)
 			{
 				// ***
 				// *** 

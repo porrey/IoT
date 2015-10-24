@@ -25,9 +25,7 @@ using Porrey.Uwp.IoT.Devices.Arduino;
 using Porrey.Uwp.IoT.Devices.KeyPad;
 using Porrey.Uwp.IoT.Devices.Lifx;
 using Porrey.Uwp.IoT.Sensors;
-using Porrey.Uwp.IoT.System;
 using Porrey.Uwp.Ntp;
-using Windows.Devices.Gpio;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -169,7 +167,7 @@ namespace MyTime3
 			float h = await temp.ReadHumidityAsync();
 			float tc1 = await temp.ReadTemperatureAsync();
 			float tf1 = tc1.ConvertToFahrenheit();
-        }
+		}
 
 		private async Task TestLightSensor()
 		{
@@ -214,26 +212,39 @@ namespace MyTime3
 
 		private async Task TestArduino()
 		{
+			float f = 1.45f;
+			byte[] data = BitConverter.GetBytes(f);
+
 			Arduino arduino = new Arduino(0x04);
 			await arduino.InitializeAsync();
+
+			byte[] result = await arduino.CustomCommandAsync(15, new byte[0], 9);
+			float humidity = BitConverter.ToSingle(result, 1);
+			float temperature = BitConverter.ToSingle(result, 5);
 
 			// ***
 			// *** Red
 			// ***
-			await arduino.PinModeAsync(9, ArduinoPinMode.Output);
-			await arduino.DigitalWriteAsync(9, ArduinoPinValue.Low);
-
-			// ***
-			// *** Blue
-			// ***
-			await arduino.PinModeAsync(10, ArduinoPinMode.Output);
-			await arduino.DigitalWriteAsync(10, ArduinoPinValue.Low);
+			//await arduino.PinModeAsync(9, ArduinoPinMode.Output);
+			await arduino.AnalogWriteAsync(9, 25);
 
 			// ***
 			// *** Green
 			// ***
-			await arduino.PinModeAsync(11, ArduinoPinMode.Output);
-			await arduino.DigitalWriteAsync(11, ArduinoPinValue.High);
+			//await arduino.PinModeAsync(10, ArduinoPinMode.Output);
+			await arduino.AnalogWriteAsync(10, 200);
+
+			// ***
+			// *** Blue
+			// ***
+			//await arduino.PinModeAsync(11, ArduinoPinMode.Output);
+			await arduino.AnalogWriteAsync(11, 45);
+
+			await Task.Delay(5000);
+
+			await arduino.AnalogWriteAsync(9, 255);
+			await arduino.AnalogWriteAsync(10, 255);
+			await arduino.AnalogWriteAsync(11, 255);
 		}
 	}
 }
