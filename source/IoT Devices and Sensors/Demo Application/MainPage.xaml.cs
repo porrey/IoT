@@ -220,20 +220,20 @@ namespace MyTime3
 			// ***
 			// *** Red
 			// ***
-			await arduino.PinMode(9, ArduinoPinMode.Output);
-			await arduino.DigitalWrite(9, ArduinoPinValue.Low);
+			await arduino.PinModeAsync(9, ArduinoPinMode.Output);
+			await arduino.DigitalWriteAsync(9, ArduinoPinValue.Low);
 
 			// ***
 			// *** Blue
 			// ***
-			await arduino.PinMode(10, ArduinoPinMode.Output);
-			await arduino.DigitalWrite(10, ArduinoPinValue.Low);
+			await arduino.PinModeAsync(10, ArduinoPinMode.Output);
+			await arduino.DigitalWriteAsync(10, ArduinoPinValue.Low);
 
 			// ***
 			// *** Green
 			// ***
-			await arduino.PinMode(11, ArduinoPinMode.Output);
-			await arduino.DigitalWrite(11, ArduinoPinValue.High);
+			await arduino.PinModeAsync(11, ArduinoPinMode.Output);
+			await arduino.DigitalWriteAsync(11, ArduinoPinValue.High);
 		}
 	}
 }
