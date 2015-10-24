@@ -217,15 +217,6 @@ namespace MyTime3
 			Arduino arduino = new Arduino(0x04);
 			await arduino.InitializeAsync();
 
-			await arduino.Tone(3, 45001, TimeSpan.FromSeconds(6.19715));
-			await arduino.NoTone(3);
-
-			await arduino.Tone(3, 36128);
-			await arduino.NoTone(3);
-
-			await arduino.PinMode(2, ArduinoPinMode.Input);
-			ArduinoPinValue result = await arduino.DigitalRead(2);
-
 			// ***
 			// *** Red
 			// ***
@@ -236,7 +227,7 @@ namespace MyTime3
 			// *** Blue
 			// ***
 			await arduino.PinMode(10, ArduinoPinMode.Output);
-			await arduino.DigitalWrite(10, ArduinoPinValue.High);
+			await arduino.DigitalWrite(10, ArduinoPinValue.Low);
 
 			// ***
 			// *** Green
