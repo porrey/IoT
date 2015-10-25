@@ -10,16 +10,17 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 		DigitalWrite = 2,
 		AnalogRead = 3,
 		AnalogWrite = 4,
-		Tone1 = 5,
-		Tone2 = 6,
-		NoTone = 7,
-		ShiftOut = 8,
-		Interrupts = 9,
-		NoInterrupts = 10,
-		BreatheLed = 11,
-		NoBreatheLed = 12,
-		PulsePin = 13,
-		NoPulsePin = 14
+		AnalogReference = 5,
+        Tone1 = 6,
+		Tone2 = 7,
+		NoTone = 8,
+		ShiftOut = 9,
+		Interrupts = 10,
+		NoInterrupts = 11,
+		BreatheLed = 12,
+		NoBreatheLed = 13,
+		PulsePin = 14,
+		NoPulsePin = 15
 	}
 
 	public enum ArduinoPinValue
@@ -54,11 +55,21 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 		MsbFirst = 1
 	}
 
+	public enum ArduinoAnalogReferenceType
+	{
+		Default,
+		Internal,
+		Internal1v1,
+		Internal2v56,
+		External
+	}
+
 	public interface IArduino
 	{
 		Task<ushort> AnalogReadAsync(byte pin);
 		Task<bool> AnalogWriteAsync(byte pin, byte value);
-		Task<ArduinoPinValue> DigitalReadAsync(byte pin);
+		Task<bool> AnalogReferenceAsync(ArduinoAnalogReferenceType type);
+        Task<ArduinoPinValue> DigitalReadAsync(byte pin);
 		Task<bool> DigitalWriteAsync(byte pin, ArduinoPinValue value);
 		Task<bool> NoToneAsync(byte pin);
 		Task<bool> PinModeAsync(byte pin, ArduinoPinMode pinMode);
