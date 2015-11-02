@@ -212,33 +212,55 @@ namespace MyTime3
 
 		private async Task TestArduino()
 		{
-			float f = 1.45f;
-			byte[] data = BitConverter.GetBytes(f);
-
-			Arduino arduino = new Arduino(0x04);
+			// ***
+			// *** Initialize the Arduino library
+			// ***
+			IArduino arduino = new Arduino(0x04);
 			await arduino.InitializeAsync();
-
-			byte[] result = await arduino.CustomCommandAsync(15, new byte[0], 9);
-			float humidity = BitConverter.ToSingle(result, 1);
-			float temperature = BitConverter.ToSingle(result, 5);
+			Arduino.ReadDelayTime = 1500;
 
 			// ***
-			// *** Red
+			// *** Note the Arduino.FirstCustomRegisterId + 0 should match the
+			// *** Rpi2Bridge.registerCommand(FIRST_CUSTOM_REGISTER_ID + 0, 2, getDhtReading, NULL);
+			// *** command in setup().Change the value of 0 to any value depending on the number of
+			// *** custom commands (ensure each register ID is unique).
 			// ***
-			//await arduino.PinModeAsync(9, ArduinoPinMode.Output);
+			byte[] result = await arduino.CustomCommandAsync(Arduino.FirstCustomRegisterId + 0, new byte[0], 9);
+
+			if (result[0] == 0)
+			{
+				float humidity = BitConverter.ToSingle(result, 1);
+				float temperature = BitConverter.ToSingle(result, 5);
+			}
+			else
+			{
+				// ***   
+				// *** Map your custom errors
+				// ***
+				switch (result[0])
+				{
+					case 1:
+						throw new ArduinoException("DHT11 checksum error.");						
+					case 2:
+						throw new ArduinoException("DHT11 timeout.");
+					case 3:
+						throw new ArduinoException("DHT11 failed to connect.");
+					case 4:
+						throw new ArduinoException("DHT11 failed to acknowledge request.");
+					case 5:
+						throw new ArduinoException("DHT11 failed to acknowledge request.");
+				}
+			}
+
 			await arduino.AnalogWriteAsync(9, 25);
-
-			// ***
-			// *** Green
-			// ***
-			//await arduino.PinModeAsync(10, ArduinoPinMode.Output);
 			await arduino.AnalogWriteAsync(10, 200);
-
-			// ***
-			// *** Blue
-			// ***
-			//await arduino.PinModeAsync(11, ArduinoPinMode.Output);
 			await arduino.AnalogWriteAsync(11, 45);
+
+			await Task.Delay(5000);
+
+			await arduino.AnalogWriteAsync(9, 110);
+			await arduino.AnalogWriteAsync(10, 50);
+			await arduino.AnalogWriteAsync(11, 145);
 
 			await Task.Delay(5000);
 

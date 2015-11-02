@@ -32,7 +32,7 @@ namespace Porrey.Uwp.IoT.Calibration
 		}
 
 		/// <summary>
-		/// Normalzies value to a number between 0 and 1.
+		/// Normalizes value to a number between 0 and 1.
 		/// </summary>
 		/// <param name="value">The value to be normalized.</param>
 		/// <param name="maximumValue">The maximum of value.</param>
