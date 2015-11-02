@@ -108,6 +108,24 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 			return returnValue;
 		}
 
+		public async Task<bool> AnalogReferenceAsync(ArduinoAnalogReferenceType type)
+		{
+			bool returnValue = false;
+
+			byte[] registerId = BitConverter.GetBytes((uint)ArduinoRegister.AnalogReference);
+			await this.WriteAsync(new byte[] { registerId[0], registerId[1], (byte)type });
+
+			// ***
+			// *** Check if the call was successful
+			// ***
+			if (await this.CheckResult())
+			{
+				returnValue = true;
+			}
+
+			return returnValue;
+		}
+
 		public async Task<bool> ToneAsync(byte pin, ushort frequency, TimeSpan duration)
 		{
 			bool returnValue = false;
