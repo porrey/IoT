@@ -2,7 +2,7 @@
 
 namespace Porrey.Uwp.IoT.Devices.Arduino
 {
-	public abstract class ArduinoException : Exception
+	public class ArduinoException : Exception
 	{
 		public ArduinoException()
 			: base()

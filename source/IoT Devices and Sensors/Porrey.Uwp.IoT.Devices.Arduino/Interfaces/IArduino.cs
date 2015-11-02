@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Porrey.Uwp.IoT.Sensors;
 
 namespace Porrey.Uwp.IoT.Devices.Arduino
 {
@@ -45,7 +46,8 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 		CommandNotSupported = 3,
 		MappingMismatch = 4,
 		MissingCallback = 5,
-		IdTooLarge = 6
+		IdTooLarge = 6,
+		BufferNotReady = 255
 	}
 
 	public enum ArduinoBitOrder
@@ -54,7 +56,7 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 		MsbFirst = 1
 	}
 
-	public interface IArduino
+	public interface IArduino : II2c
 	{
 		Task<ushort> AnalogReadAsync(byte pin);
 		Task<bool> AnalogWriteAsync(byte pin, byte value);
@@ -72,5 +74,5 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 		Task<bool> NoBreatheLedAsync(byte pin);
 		Task<bool> PulsePinAsync(byte pin, ArduinoPinValue offValue, TimeSpan onDuration, TimeSpan offDuration);
 		Task<bool> NoPulsePinAsync(byte pin);
-    }
+	}
 }

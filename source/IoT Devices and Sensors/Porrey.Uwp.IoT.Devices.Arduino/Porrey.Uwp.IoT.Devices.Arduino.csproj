@@ -104,11 +104,12 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="IoT.Arduino.1.0.1.nupkg" />
+    <None Include="IoT.Arduino.1.0.2.nupkg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\ArduinoException.cs" />
+    <Compile Include="Exceptions\BufferNotReadyException.cs" />
     <Compile Include="Exceptions\MissingMappingException.cs" />
     <Compile Include="Exceptions\MappingMismatchException.cs" />
     <Compile Include="Exceptions\CommandNotSupportedException.cs" />

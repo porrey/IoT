@@ -5,8 +5,9 @@ using Porrey.Uwp.IoT.Sensors;
 namespace Porrey.Uwp.IoT.Devices.Arduino
 {
 	public class Arduino : I2c, IArduino
-	{
-		private const int DELAY = 100;
+	{		
+		public static int ReadDelayTime { get; set; } = 500;
+		public const int FirstCustomRegisterId = 16;
 
 		public Arduino(byte address)
 			: base(address)
@@ -241,7 +242,7 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 			// ***
 			// *** Delay and read
 			// ***
-			await Task.Delay(DELAY);
+			await Task.Delay(Arduino.ReadDelayTime);
 			await this.ReadAsync(returnValue);
 
 			return returnValue;
@@ -352,7 +353,7 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 		{
 			byte[] readBuffer = new byte[length];
 
-			await Task.Delay(DELAY);			
+			await Task.Delay(Arduino.ReadDelayTime);			
 			await this.ReadAsync(readBuffer);
 
 			return readBuffer;
@@ -412,7 +413,9 @@ namespace Porrey.Uwp.IoT.Devices.Arduino
 					throw new MissingMappingException();
 				case ArduinoResult.IdTooLarge:
 					throw new RegisterIdTooLargeException();
-			}
+				case ArduinoResult.BufferNotReady:
+					throw new BufferNotReadyException();
+            }
 		}
 	}
 }
