@@ -17,6 +17,7 @@
 // see http://www.gnu.org/licenses/.
 //
 using System.Threading.Tasks;
+using Windows.Devices.I2c;
 
 namespace Porrey.Uwp.IoT.Sensors
 {
@@ -26,6 +27,16 @@ namespace Porrey.Uwp.IoT.Sensors
 	/// </summary>
 	public interface II2c
 	{
+		I2cBusSpeed BusSpeed { get; }
+		byte DeviceAddress { get; }
+		bool IsInitialized { get; }
+
+		Task<InitializationResult> InitializeAsync();
+		Task<bool> ReadAsync(byte[] readBuffer);
+		Task<byte[]> ReadBytesAsync(int bufferSize);
+		Task<byte[]> ReadRegisterBytesAsync(byte registerId, int bufferSize);
 		Task ResetAsync();
+		Task<bool> WriteAsync(byte[] writeBuffer);
+		Task<bool> WriteReadAsync(byte[] writeBuffer, byte[] readBuffer);
 	}
 }

@@ -104,7 +104,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="IoT.I2c.1.0.2.nupkg" />
+    <None Include="IoT.I2c.1.0.4.nupkg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -112,7 +112,7 @@
     <Compile Include="Exceptions\InvalidAddressException.cs" />
     <Compile Include="Exceptions\I2cException.cs" />
     <Compile Include="Exceptions\DeviceNotInitializedException.cs" />
-    <Compile Include="Interfaces\II2cSensor.cs" />
+    <Compile Include="Interfaces\II2c.cs" />
     <Compile Include="Models\Bcd.cs" />
     <Compile Include="Models\I2c.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
