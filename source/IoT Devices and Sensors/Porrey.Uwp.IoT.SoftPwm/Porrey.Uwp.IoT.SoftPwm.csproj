@@ -104,7 +104,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="IoT.SoftPwm.1.0.0.nupkg" />
+    <None Include="IoT.SoftPwm.1.0.1.nupkg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>

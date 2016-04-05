@@ -51,6 +51,7 @@ namespace Porrey.Uwp.IoT
 		public EventHandler PwmPulsed = null;
 
 		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+		private Task _pulserTask;
 		private double _value = 0;
 		private double _previousLowPulseWidth = 0d;
 		private double _previousHighPulseWidth = 0d;
@@ -212,7 +213,7 @@ namespace Porrey.Uwp.IoT
 		/// Stop the SoftPwm on the GPIO pin.
 		/// </summary>
 		/// <returns></returns>
-		public Task StopAsync()
+		public async Task StopAsync()
 		{
 			// ***
 			// *** Check if disposed and throw an exception 
@@ -227,9 +228,9 @@ namespace Porrey.Uwp.IoT
 			_cancellationTokenSource.Cancel();
 
 			// ***
-			// *** Return Task result
+			// *** Wait for task to complete.
 			// ***
-			return Task.FromResult(0);
+			await _pulserTask;
 		}
 
 		/// <summary>
