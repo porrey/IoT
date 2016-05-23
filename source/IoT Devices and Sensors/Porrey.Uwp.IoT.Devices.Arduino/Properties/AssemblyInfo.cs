@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Porrey.Uwp.IoT.Devices.Arduino")]
-[assembly: AssemblyDescription("Provides an integration point to cornol an Arduino via an i2c connection. Requires a specific sketch to be running onthe Arduino.")]
+[assembly: AssemblyDescription("Provides an integration point to control an Arduino via an I2C connection. Requires a specific sketch to be running on the Arduino.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Daniel Porrey")]
 [assembly: AssemblyProduct("Porrey.Uwp.IoT.Devices.Arduino")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
-[assembly: AssemblyTrademark("Copyright © 2015 Daniel M. Porrey. All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2015-2106")]
+[assembly: AssemblyTrademark("Copyright © 2015-2106 Daniel M. Porrey. All Rights Reserved.")]
 [assembly: AssemblyCulture("")]
 
 // Version information for an assembly consists of the following four values:
