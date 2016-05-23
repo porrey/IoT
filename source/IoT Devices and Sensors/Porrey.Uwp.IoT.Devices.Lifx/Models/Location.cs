@@ -1,4 +1,4 @@
-﻿// Copyright © 2015 Daniel Porrey. All Rights Reserved.
+﻿// Copyright © 2015-2106 Daniel Porrey. All Rights Reserved.
 //
 // This file is part of the IoT Devices and Sensors project.
 // 
@@ -16,8 +16,6 @@
 // along with IoT Devices and Sensors. If not, 
 // see http://www.gnu.org/licenses/.
 //
-using Newtonsoft.Json;
-
 namespace Porrey.Uwp.IoT.Devices.Lifx
 {
 	public class Location : NamedEntity, ISelector

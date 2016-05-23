@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Daniel Porrey")]
 [assembly: AssemblyProduct("Porrey.Uwp.IoT.Calibration")]
-[assembly: AssemblyCopyright("Copyright © 2015 Daniel M. Porrey. All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2015-2106 Daniel M. Porrey. All Rights Reserved.")]
 [assembly: AssemblyTrademark("written by Daniel M. Porrey")]
 [assembly: AssemblyCulture("")]
 

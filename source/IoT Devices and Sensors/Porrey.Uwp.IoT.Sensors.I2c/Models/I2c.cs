@@ -1,4 +1,4 @@
-﻿// Copyright © 2015 Daniel Porrey. All Rights Reserved.
+﻿// Copyright © 2015-2106 Daniel Porrey. All Rights Reserved.
 //
 // This file is part of the IoT Devices and Sensors project.
 // 
@@ -41,7 +41,7 @@ namespace Porrey.Uwp.IoT.Sensors
 		/// </summary>
 		Successful,
 		/// <summary>
-		/// Initialization failed due to lack of an i2C controller.
+		/// Initialization failed due to lack of an I2C controller.
 		/// </summary>
 		NoI2cController,
 		/// <summary>

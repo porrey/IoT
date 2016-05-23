@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Porrey.Uwp.IoT.Sensors")]
-[assembly: AssemblyDescription("Provides simplified I2C integration as well as an interface to buid specific I2C components on.")]
+[assembly: AssemblyDescription("Provides simplified I2C integration as well as an interface to build specific I2C components on.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Daniel Porrey")]
 [assembly: AssemblyProduct("Porrey.Uwp.IoT.Sensors")]
-[assembly: AssemblyCopyright("Copyright © 2015 Daniel Porrey. All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2015-2106 Daniel Porrey. All Rights Reserved.")]
 [assembly: AssemblyTrademark("written by Daniel Porrey")]
 [assembly: AssemblyCulture("")]
 

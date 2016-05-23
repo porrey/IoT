@@ -107,7 +107,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Demo_Application_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="COPYING.txt" />
