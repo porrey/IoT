@@ -28,7 +28,7 @@ using Windows.Foundation.Metadata;
 namespace Porrey.Uwp.IoT.Sensors
 {
 	/// <summary>
-	/// Defines the result of the initialization process for the MCP9808.
+	/// Defines the result of the initialization process for the i2c device.
 	/// </summary>
 	public enum InitializationResult
 	{
@@ -45,7 +45,7 @@ namespace Porrey.Uwp.IoT.Sensors
 		/// </summary>
 		NoI2cController,
 		/// <summary>
-		/// Initialization failed because an MCP9808 was not 
+		/// Initialization failed because a device was not 
 		/// found on the I2C bus.
 		/// </summary>
 		DeviceNotFound,
