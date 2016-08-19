@@ -78,7 +78,7 @@ namespace Porrey.Uwp.IoT.Sensors
 		/// Gets the device address used when this instance 
 		/// of the was created.
 		/// </summary>
-		public byte DeviceAddress
+		public virtual byte DeviceAddress
 		{
 			get
 			{
@@ -94,7 +94,7 @@ namespace Porrey.Uwp.IoT.Sensors
 		/// Gets the I2C bus speed set when this instance 
 		/// of the device was created.
 		/// </summary>
-		public I2cBusSpeed BusSpeed
+		public virtual I2cBusSpeed BusSpeed
 		{
 			get
 			{
@@ -127,7 +127,7 @@ namespace Porrey.Uwp.IoT.Sensors
 		/// successfully or not. True indicates that Initialize() was
 		/// successfully called.
 		/// </summary>
-		public bool IsInitialized
+		public virtual bool IsInitialized
 		{
 			get
 			{
@@ -144,7 +144,7 @@ namespace Porrey.Uwp.IoT.Sensors
 		/// </summary>
 		/// <returns>Returns an InitializationResult value indicating if the
 		/// initialization was success or not.</returns>
-		public async Task<InitializationResult> InitializeAsync()
+		public virtual async Task<InitializationResult> InitializeAsync()
 		{
 			InitializationResult returnValue = InitializationResult.None;
 
@@ -175,6 +175,7 @@ namespace Porrey.Uwp.IoT.Sensors
 					try
 					{
 						await this.OnInitializeAsync();
+						returnValue = InitializationResult.Successful;
 					}
 					catch (Exception ex)
 					{
@@ -211,7 +212,7 @@ namespace Porrey.Uwp.IoT.Sensors
 			return returnValue;
 		}
 
-		public Task<bool> WriteReadAsync(byte[] writeBuffer, byte[] readBuffer)
+		public virtual Task<bool> WriteReadAsync(byte[] writeBuffer, byte[] readBuffer)
 		{
 			bool returnValue = false;
 
@@ -230,7 +231,7 @@ namespace Porrey.Uwp.IoT.Sensors
 			return Task<bool>.FromResult(returnValue);
 		}
 
-		public Task<bool> WriteAsync(byte[] writeBuffer)
+		public virtual Task<bool> WriteAsync(byte[] writeBuffer)
 		{
 			bool returnValue = false;
 
@@ -249,7 +250,7 @@ namespace Porrey.Uwp.IoT.Sensors
 			return Task<bool>.FromResult(returnValue);
 		}
 
-		public Task<bool> ReadAsync(byte[] readBuffer)
+		public virtual Task<bool> ReadAsync(byte[] readBuffer)
 		{
 			bool returnValue = false;
 
@@ -268,21 +269,21 @@ namespace Porrey.Uwp.IoT.Sensors
 			return Task<bool>.FromResult(returnValue);
 		}
 
-		public async Task<byte[]> ReadBytesAsync(int bufferSize)
+		public virtual async Task<byte[]> ReadBytesAsync(int bufferSize)
 		{
 			byte[] readBuffer = new byte[bufferSize];
 			await this.ReadAsync(readBuffer);
 			return readBuffer;
 		}
 
-		public async Task<byte[]> ReadRegisterBytesAsync(byte registerId, int bufferSize)
+		public virtual async Task<byte[]> ReadRegisterBytesAsync(byte registerId, int bufferSize)
 		{
 			byte[] readBuffer = new byte[bufferSize];
 			await this.WriteReadAsync(new byte[] { registerId }, readBuffer);
 			return readBuffer;
 		}
 
-		public async Task ResetAsync()
+		public virtual async Task ResetAsync()
 		{
 			await this.OnResetAsync();
 		}

@@ -104,7 +104,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="IoT.I2c.1.0.5.nupkg" />
+    <None Include="IoT.I2c.1.0.6.nupkg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
