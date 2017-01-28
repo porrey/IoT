@@ -29,7 +29,7 @@ using Porrey.Uwp.Ntp;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace MyTime3
+namespace DemoApplication
 {
 	public sealed partial class MainPage : Page
 	{

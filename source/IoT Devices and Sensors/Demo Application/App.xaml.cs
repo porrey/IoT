@@ -1,4 +1,4 @@
-﻿// Copyright © 2015-2106 Daniel Porrey. All Rights Reserved.
+﻿// Copyright © 2015-2017 Daniel Porrey. All Rights Reserved.
 //
 // This file is part of the IoT Devices and Sensors project.
 // 
@@ -23,7 +23,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace MyTime3
+namespace DemoApplication
 {
 	sealed partial class App : Application
     {

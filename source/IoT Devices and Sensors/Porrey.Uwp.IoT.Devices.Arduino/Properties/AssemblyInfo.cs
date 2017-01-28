@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Daniel Porrey")]
 [assembly: AssemblyProduct("Porrey.Uwp.IoT.Devices.Arduino")]
-[assembly: AssemblyCopyright("Copyright © 2015-2106")]
-[assembly: AssemblyTrademark("Copyright © 2015-2106 Daniel M. Porrey. All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2015-2017")]
+[assembly: AssemblyTrademark("Copyright © 2015-2017 Daniel M. Porrey. All Rights Reserved.")]
 [assembly: AssemblyCulture("")]
 
 // Version information for an assembly consists of the following four values:

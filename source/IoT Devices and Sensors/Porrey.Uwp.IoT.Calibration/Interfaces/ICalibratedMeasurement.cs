@@ -1,4 +1,4 @@
-﻿// Copyright © 2015-2106 Daniel Porrey. All Rights Reserved.
+﻿// Copyright © 2015-2017 Daniel Porrey. All Rights Reserved.
 //
 // This file is part of the IoT Devices and Sensors project.
 // 
