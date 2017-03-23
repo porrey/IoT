@@ -24,8 +24,6 @@ namespace Porrey.Uwp.Ntp
 	public interface INtpClient
 	{
 		TimeSpan Timeout { get; set; }
-
-		Task<DateTimeOffset?> GetAsync(string server);
 		Task<DateTimeOffset?> GetAsync(params string[] servers);
 	}
 }

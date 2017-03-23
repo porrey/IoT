@@ -28,7 +28,7 @@ using Windows.Storage.Streams;
 namespace Porrey.Uwp.Ntp
 {
 	/// <summary>
-	/// Gets the current date and time from one or more network servers.
+	/// Gets the current date and time from one or more network time servers.
 	/// </summary>
 	public class NtpClient : INtpClient
 	{
@@ -51,7 +51,7 @@ namespace Porrey.Uwp.Ntp
 		/// of the NTP server to call.</param>
 		/// <returns>Returns a DateTime instance containing the date and time
 		/// obtained from the NTP server.</returns>
-		public async Task<DateTimeOffset?> GetAsync(string server)
+		private async Task<DateTimeOffset?> GetAsync(string server)
 		{
 			DateTimeOffset? returnValue = null;
 
@@ -131,9 +131,14 @@ namespace Porrey.Uwp.Ntp
 			DateTimeOffset? returnValue = null;
 
 			// ***
+			// *** Collect and throw exceptions if no result is found.
+			// ***
+			List<Exception> exceptions = new List<Exception>();
+
+			// ***
 			// *** Create the list of tasks
 			// ***
-			IEnumerable<Task<DateTimeOffset?>> taskQuery = from server in servers select this.GetAsync(server);
+			IEnumerable<Task<DateTimeOffset?>> taskQuery = servers.Select(t => this.GetAsync(t)t);
 
 			// ***
 			// *** Execute the tasks
@@ -143,7 +148,7 @@ namespace Porrey.Uwp.Ntp
 			while (taskList.Count() > 0)
 			{
 				// ***
-				// *** Select one of the results
+				// *** Select one of the results.
 				// ***
 				Task<DateTimeOffset?> completedTask = await Task.WhenAny(taskList);
 
@@ -163,10 +168,22 @@ namespace Porrey.Uwp.Ntp
 					returnValue = completedTask.Result;
 
 					// ***
-					// *** return since we only need one result
+					// *** Return since we only need one result
 					// ***
 					break;
 				}
+				else
+				{
+					exceptions.Add(completedTask.Exception);
+				}
+			}
+
+			// ***
+			// *** Determine if an exception should be thrown.
+			// ***
+			if (exceptions.Count() > 0 && returnValue == null)
+			{
+				throw new AggregateException(exceptions);
 			}
 
 			return returnValue;

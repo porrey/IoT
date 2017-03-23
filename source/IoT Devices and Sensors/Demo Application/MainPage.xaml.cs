@@ -40,7 +40,7 @@ namespace DemoApplication
 
 		protected async override void OnNavigatedTo(NavigationEventArgs e)
 		{
-			await TestArduino();
+			await TestNtpClient();
 			base.OnNavigatedTo(e);
 		}
 
@@ -240,7 +240,7 @@ namespace DemoApplication
 				switch (result[0])
 				{
 					case 1:
-						throw new ArduinoException("DHT11 checksum error.");						
+						throw new ArduinoException("DHT11 checksum error.");
 					case 2:
 						throw new ArduinoException("DHT11 timeout.");
 					case 3:
@@ -267,6 +267,20 @@ namespace DemoApplication
 			await arduino.AnalogWriteAsync(9, 255);
 			await arduino.AnalogWriteAsync(10, 255);
 			await arduino.AnalogWriteAsync(11, 255);
+		}
+
+		private async Task TestNtpClient()
+		{
+			INtpClient ntp = new NtpClient();
+
+			try
+			{
+				var result = await ntp.GetAsync("0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org");
+			}
+			catch (Exception ex)
+			{
+
+			}
 		}
 	}
 }
