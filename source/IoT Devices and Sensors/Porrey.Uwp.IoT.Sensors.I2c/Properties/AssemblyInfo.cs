@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Daniel Porrey")]
 [assembly: AssemblyProduct("Porrey.Uwp.IoT.Sensors")]
-[assembly: AssemblyCopyright("Copyright © 2015-2017 Daniel Porrey. All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2015-2018 Daniel Porrey. All Rights Reserved.")]
 [assembly: AssemblyTrademark("written by Daniel Porrey")]
 [assembly: AssemblyCulture("")]
 
@@ -24,6 +24,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.6.0")]
-[assembly: AssemblyFileVersion("1.0.6.0")]
+[assembly: AssemblyVersion("1.0.7.0")]
+[assembly: AssemblyFileVersion("1.0.7.0")]
 [assembly: ComVisible(false)]
