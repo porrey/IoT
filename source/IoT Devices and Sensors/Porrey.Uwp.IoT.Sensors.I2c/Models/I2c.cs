@@ -84,7 +84,7 @@ namespace Porrey.Uwp.IoT.Sensors
 			{
 				return _deviceAddress;
 			}
-			private set
+			protected set
 			{
 				_deviceAddress = value;
 			}
@@ -156,12 +156,14 @@ namespace Porrey.Uwp.IoT.Sensors
 			// ***
 			// *** Find the I2C bus controller device with our selector string
 			// ***
-			var dis = await DeviceInformation.FindAllAsync(aqs).AsTask();
+			DeviceInformationCollection dis = await DeviceInformation.FindAllAsync(aqs).AsTask();
 
 			if (dis.Count > 0)
 			{
-				var settings = new I2cConnectionSettings(this.DeviceAddress);
-				settings.BusSpeed = this.BusSpeed;
+				I2cConnectionSettings settings = new I2cConnectionSettings(this.DeviceAddress)
+				{
+					BusSpeed = this.BusSpeed
+				};
 
 				// ***
 				// *** Create an I2cDevice with our selected bus controller and I2C settings
@@ -170,7 +172,7 @@ namespace Porrey.Uwp.IoT.Sensors
 
 				if (this.Device != null)
 				{
-					IsInitialized = true;
+					this.IsInitialized = true;
 
 					try
 					{
@@ -228,7 +230,7 @@ namespace Porrey.Uwp.IoT.Sensors
 				throw new DeviceNotInitializedException();
 			}
 
-			return Task<bool>.FromResult(returnValue);
+			return Task.FromResult(returnValue);
 		}
 
 		public virtual Task<bool> WriteAsync(byte[] writeBuffer)
@@ -247,7 +249,7 @@ namespace Porrey.Uwp.IoT.Sensors
 				throw new DeviceNotInitializedException();
 			}
 
-			return Task<bool>.FromResult(returnValue);
+			return Task.FromResult(returnValue);
 		}
 
 		public virtual Task<bool> ReadAsync(byte[] readBuffer)
@@ -266,7 +268,7 @@ namespace Porrey.Uwp.IoT.Sensors
 				throw new DeviceNotInitializedException();
 			}
 
-			return Task<bool>.FromResult(returnValue);
+			return Task.FromResult(returnValue);
 		}
 
 		public virtual async Task<byte[]> ReadBytesAsync(int bufferSize)
