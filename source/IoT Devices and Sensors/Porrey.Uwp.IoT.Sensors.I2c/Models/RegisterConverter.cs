@@ -129,7 +129,7 @@ namespace Porrey.Uwp.IoT.Sensors.I2C
 		/// <param name="value">The byte value to be checked.</param>
 		/// <param name="bitIndex">The bit position from 0 to 7.</param>
 		/// <returns>Returns true if the bit is High and false if the bit is Low.</returns>
-		public static bool BitIsHigh(byte value, int bitIndex)
+		public static bool BitIsHigh(this byte value, int bitIndex)
 		{
 			if (bitIndex < 0 || bitIndex > 7) throw new ArgumentOutOfRangeException(nameof(bitIndex));
 			byte mask = (byte)Math.Pow(2, bitIndex);
@@ -143,7 +143,7 @@ namespace Porrey.Uwp.IoT.Sensors.I2C
 		/// <param name="value">The byte value to be checked.</param>
 		/// <param name="bitIndex">The bit position from 0 to 7.</param>
 		/// <returns>Returns true if the bit is Low and false if the bit is High.</returns>
-		public static bool BitIsLow(byte value, int bitIndex)
+		public static bool BitIsLow(this byte value, int bitIndex)
 		{
 			if (bitIndex < 0 || bitIndex > 7) throw new ArgumentOutOfRangeException(nameof(bitIndex));
             byte mask = (byte)Math.Pow(2, bitIndex);
@@ -158,7 +158,7 @@ namespace Porrey.Uwp.IoT.Sensors.I2C
 		/// <param name="bitIndex">The index of the bit to modify. This
 		/// value can be 0 to 7.</param>
 		/// <returns>Returns the value of the bit at the specified position as a boolean.</returns>
-		public static bool GetBit(byte value, int bitIndex)
+		public static bool GetBit(this byte value, int bitIndex)
 		{
 			bool returnValue = false;
 
@@ -178,7 +178,7 @@ namespace Porrey.Uwp.IoT.Sensors.I2C
 		/// value can be 0 to 7.</param>
 		/// <param name="bit">The value to be set in the byte.</param>
 		/// <returns>Returns the modified byte.</returns>
-		public static byte SetBit(byte value, int bitIndex, bool bit)
+		public static byte SetBit(this byte value, int bitIndex, bool bit)
 		{
 			if (bitIndex < 0 || bitIndex > 7) throw new ArgumentOutOfRangeException(nameof(bitIndex));
 			byte mask = (byte)Math.Pow(2, bitIndex);

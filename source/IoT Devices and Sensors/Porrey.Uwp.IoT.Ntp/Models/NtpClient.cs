@@ -138,7 +138,7 @@ namespace Porrey.Uwp.Ntp
 			// ***
 			// *** Create the list of tasks
 			// ***
-			IEnumerable<Task<DateTimeOffset?>> taskQuery = servers.Select(t => this.GetAsync(t)t);
+			IEnumerable<Task<DateTimeOffset?>> taskQuery = servers.Select(t => this.GetAsync(t));
 
 			// ***
 			// *** Execute the tasks

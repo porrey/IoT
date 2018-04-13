@@ -18,8 +18,6 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Devices.I2c;
@@ -57,6 +55,9 @@ namespace Porrey.Uwp.IoT.Sensors
 
 	public class I2c : II2c, IDisposable
 	{
+		public const byte MinimumAddress = 0x08;
+		public const byte MaximumAddress = 0x77;
+
 		private bool _initialized = false;
 		private byte _deviceAddress = 0;
 		private I2cBusSpeed _busSpeed = I2cBusSpeed.FastMode;
@@ -233,6 +234,25 @@ namespace Porrey.Uwp.IoT.Sensors
 			return Task.FromResult(returnValue);
 		}
 
+		public virtual Task<byte[]> WriteReadAsync(byte[] writeBuffer, int readBufferSize)
+		{
+			byte[] returnValue = new byte[readBufferSize];
+
+			if (this.IsInitialized)
+			{
+				// ***
+				// *** 
+				// ***
+				this.Device.WriteRead(writeBuffer, returnValue);
+			}
+			else
+			{
+				throw new DeviceNotInitializedException();
+			}
+
+			return Task.FromResult(returnValue);
+		}
+
 		public virtual Task<bool> WriteAsync(byte[] writeBuffer)
 		{
 			bool returnValue = false;
@@ -327,5 +347,111 @@ namespace Porrey.Uwp.IoT.Sensors
 		{
 			return Task.FromResult(0);
 		}
-    }
+
+		public static async Task<IEnumerable<byte>> FindDevicesAsync()
+		{
+			IList<byte> returnValue = new List<byte>();
+
+			// *** 
+			// *** Get a selector string that will return all I2C controllers on the system 
+			// *** 
+			string aqs = I2cDevice.GetDeviceSelector();
+
+			// *** 
+			// *** Find the I2C bus controller device with our selector string 
+			// *** 
+			DeviceInformationCollection dis = await DeviceInformation.FindAllAsync(aqs).AsTask();
+
+			if (dis.Count > 0)
+			{
+				for (byte address = I2c.MinimumAddress; address <= I2c.MaximumAddress; address++)
+				{
+					I2cConnectionSettings settings = new I2cConnectionSettings(address)
+					{
+						BusSpeed = I2cBusSpeed.FastMode,
+						SharingMode = I2cSharingMode.Shared
+					};
+
+					// *** 
+					// *** Create an I2cDevice with our selected bus controller and I2C settings 
+					// *** 
+					using (I2cDevice device = await I2cDevice.FromIdAsync(dis[0].Id, settings))
+					{
+						if (device != null)
+						{
+							try
+							{
+								byte[] writeBuffer = new byte[1] { 0 };
+								device.Write(writeBuffer);
+
+								// *** 
+								// *** If no exception is thrown, there is 
+								// *** a device at this address. 
+								// *** 
+								returnValue.Add(address);
+							}
+							catch
+							{
+								// *** 
+								// *** If the address is invalid, an exception will be thrown. 
+								// *** 
+							}
+						}
+					}
+				}
+			}
+
+			return returnValue;
+		}
+
+		public static async Task<bool> FindDeviceAsync(byte address)
+		{
+			bool returnValue = false;
+
+			// *** 
+			// *** Get a selector string that will return all I2C controllers on the system 
+			// *** 
+			string aqs = I2cDevice.GetDeviceSelector();
+
+			// *** 
+			// *** Find the I2C bus controller device with our selector string 
+			// *** 
+			DeviceInformationCollection dis = await DeviceInformation.FindAllAsync(aqs).AsTask();
+
+			I2cConnectionSettings settings = new I2cConnectionSettings(address)
+			{
+				BusSpeed = I2cBusSpeed.FastMode,
+				SharingMode = I2cSharingMode.Shared
+			};
+
+			// *** 
+			// *** Create an I2cDevice with our selected bus controller and I2C settings 
+			// *** 
+			using (I2cDevice device = await I2cDevice.FromIdAsync(dis[0].Id, settings))
+			{
+				if (device != null)
+				{
+					try
+					{
+						byte[] writeBuffer = new byte[1] { 0 };
+						device.Write(writeBuffer);
+
+						// *** 
+						// *** If no exception is thrown, there is 
+						// *** a device at this address. 
+						// *** 
+						returnValue = true;
+					}
+					catch
+					{
+						// *** 
+						// *** If the address is invalid, an exception will be thrown. 
+						// *** 
+					}
+				}
+			}
+
+			return returnValue;
+		}
+	}
 }
